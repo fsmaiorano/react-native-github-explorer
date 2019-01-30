@@ -1,15 +1,74 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Text } from "react-native";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  AsyncStorage,
+  FlatList
+} from "react-native";
+import OrganizationItem from "./OrganizationItem";
 import Header from "../../components/Header";
 import styles from "./styles";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { getOrganizations } from "../../services/github";
 
 class Organizations extends Component {
+  state = {
+    data: [],
+    isLoading: true,
+    isRefreshing: false
+  };
+
+  componentDidMount() {
+    this.loadOrganizations();
+  }
+
+  loadOrganizations = async () => {
+    try {
+      this.setState({ isRefreshing: true });
+      const username = await AsyncStorage.getItem("@GithubExplorer:username");
+      const organizations = await getOrganizations(username);
+      if (organizations) {
+        this.setState({
+          data: organizations,
+          isLoading: false,
+          isRefreshing: false
+        });
+      }
+    } catch (err) {
+      console.tron.log("Error: ", err);
+    }
+  };
+
+  renderList = () => {
+    const { data, isRefreshing } = this.state;
+    return (
+      <FlatList
+        data={data}
+        keyExtractor={item => String(item.id)}
+        renderItem={this.renderListItem}
+        onRefresh={this.loadOrganizations}
+        refreshing={isRefreshing}
+        numColumns={2}
+        columnWrapperStyle={styles.columnWrapper}
+      />
+    );
+  };
+
+  renderListItem = ({ item }) => <OrganizationItem organization={item} />;
+
   render() {
+    const { isLoading } = this.state;
     return (
       <View style={styles.container}>
         <Header title="Organizations" />
+
+        {isLoading ? (
+          <ActivityIndicator style={styles.loading} />
+        ) : (
+          this.renderList()
+        )}
       </View>
     );
   }
