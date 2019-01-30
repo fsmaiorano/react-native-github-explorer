@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import {
   View,
   Text,
@@ -12,6 +13,12 @@ import { getUser } from "../../services/github";
 import styles from "./styles";
 
 class Welcome extends Component {
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func
+    })
+  };
+
   state = {
     username: "",
     isLoading: false,
