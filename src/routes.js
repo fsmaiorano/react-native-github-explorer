@@ -5,6 +5,7 @@ import {
 } from "react-navigation";
 
 import Welcome from "./pages/Welcome";
+import Profile from "./pages/Profile";
 import Repositories from "./pages/Repositories";
 import Organizations from "./pages/Organizations";
 
@@ -16,6 +17,7 @@ const Routes = (userLogged = false) =>
       {
         Welcome,
         // Repositories,
+        Profile,
         User: createBottomTabNavigator(
           {
             Repositories,

@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
   columnWrapper: {
     marginHorizontal: metrics.baseMargin * 2,
     justifyContent: "space-between"
+  },
+  text: {
+    marginTop: metrics.baseMargin * 4,
+    textAlign: "center"
   }
 });
 

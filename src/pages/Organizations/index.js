@@ -44,15 +44,24 @@ class Organizations extends Component {
   renderList = () => {
     const { data, isRefreshing } = this.state;
     return (
-      <FlatList
-        data={data}
-        keyExtractor={item => String(item.id)}
-        renderItem={this.renderListItem}
-        onRefresh={this.loadOrganizations}
-        refreshing={isRefreshing}
-        numColumns={2}
-        columnWrapperStyle={styles.columnWrapper}
-      />
+      <View>
+        {data.length > 0 ? (
+          <FlatList
+            data={data}
+            keyExtractor={item => String(item.id)}
+            renderItem={this.renderListItem}
+            onRefresh={this.loadOrganizations}
+            refreshing={isRefreshing}
+            numColumns={2}
+            columnWrapperStyle={styles.columnWrapper}
+          />
+        ) : (
+          <Text style={styles.text}>
+            This user doesn't participate of any organization{" "}
+            <Icon name="meh-o" size={20} />
+          </Text>
+        )}
+      </View>
     );
   };
 

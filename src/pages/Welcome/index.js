@@ -39,7 +39,7 @@ class Welcome extends Component {
       console.tron.log(this.props.navigation);
       if (user) {
         await AsyncStorage.setItem("@GithubExplorer:username", username);
-        navigation.navigate("User");
+        navigation.navigate("Repositories");
       }
     } catch (err) {
       console.tron.log("error: ", err);
