@@ -1,6 +1,7 @@
 import {
   createAppContainer,
   createSwitchNavigator,
+  createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
 
@@ -17,26 +18,30 @@ const Routes = (userLogged = false) =>
       {
         Welcome,
         // Repositories,
-        Profile,
-        User: createBottomTabNavigator(
-          {
-            Repositories,
-            Organizations
-          },
-          {
-            tabBarOptions: {
-              showIcon: true,
-              showLabel: false,
-              activeTintColor: colors.white,
-              inactiveTintColor: colors.whiteTransparent,
-              style: {
-                backgroundColor: colors.secundary
+        Profile: createStackNavigator({
+          // Main: { screen: Profile },
+          Main: {
+            screen: createBottomTabNavigator(
+              {
+                Repositories,
+                Organizations
+              },
+              {
+                tabBarOptions: {
+                  showIcon: true,
+                  showLabel: false,
+                  activeTintColor: colors.white,
+                  inactiveTintColor: colors.whiteTransparent,
+                  style: {
+                    backgroundColor: colors.secundary
+                  }
+                }
               }
-            }
+            )
           }
-        )
+        })
       },
-      { initialRouteName: userLogged ? "User" : "Welcome" }
+      { initialRouteName: userLogged ? "Profile" : "Welcome" }
     )
   );
 
