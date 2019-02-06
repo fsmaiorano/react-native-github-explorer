@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, TouchableOpacity, AsyncStorage } from "react-native";
 import styles from "./styles";
 import { getUser } from "../../services/github";
-
+import Header from "../../components/Header";
 class Profile extends Component {
   state = {
     user: undefined
@@ -19,11 +19,19 @@ class Profile extends Component {
     this.setState({ user: user });
   };
 
+  goToDetails = () => {
+    const { navigation } = this.props;
+    navigation.navigate("User");
+  };
+
   render() {
     const { user } = this.state;
     return (
       <View style={styles.container}>
-        <Text>PROFILE</Text>
+        {/* <Header title="Profile" /> */}
+        <TouchableOpacity onPress={this.goToDetails}>
+          <Text>More</Text>
+        </TouchableOpacity>
       </View>
     );
   }

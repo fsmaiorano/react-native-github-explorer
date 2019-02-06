@@ -60,8 +60,6 @@ class Repositories extends Component {
     const { isLoading } = this.state;
     return (
       <View style={styles.container}>
-        <Header title="Repositories" />
-
         {isLoading ? (
           <ActivityIndicator style={styles.loading} />
         ) : (

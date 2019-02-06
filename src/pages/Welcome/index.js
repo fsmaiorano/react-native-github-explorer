@@ -39,7 +39,8 @@ class Welcome extends Component {
       console.tron.log(this.props.navigation);
       if (user) {
         await AsyncStorage.setItem("@GithubExplorer:username", username);
-        navigation.navigate("Profile");
+        navigation.navigate("Main");
+        this.setState({ isLoading: false });
       }
     } catch (err) {
       console.tron.log("error: ", err);
@@ -52,7 +53,7 @@ class Welcome extends Component {
     const { username, isLoading, error } = this.state;
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
+        {/* <StatusBar barStyle="light-content" /> */}
         <Text style={styles.title}>Github Explorer</Text>
         <Text style={styles.text}>Explore any profile of Github</Text>
         <View style={styles.form}>

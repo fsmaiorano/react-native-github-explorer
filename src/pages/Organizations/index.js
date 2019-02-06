@@ -71,8 +71,6 @@ class Organizations extends Component {
     const { isLoading } = this.state;
     return (
       <View style={styles.container}>
-        <Header title="Organizations" />
-
         {isLoading ? (
           <ActivityIndicator style={styles.loading} />
         ) : (
