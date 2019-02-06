@@ -8,7 +8,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 class Header extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
     navigation: PropTypes.shape({ navigate: PropTypes.func })
   };
 
