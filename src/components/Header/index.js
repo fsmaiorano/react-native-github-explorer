@@ -20,7 +20,7 @@ class Header extends Component {
 
   render() {
     return (
-      <TouchableOpacity onPress={this.signOut}>
+      <TouchableOpacity style={styles.iconRight} onPress={this.signOut}>
         <Icon name="exchange" size={16} style={styles.icon} />
       </TouchableOpacity>
     );

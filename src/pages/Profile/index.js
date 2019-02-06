@@ -5,7 +5,8 @@ import { getUser } from "../../services/github";
 import Header from "../../components/Header";
 class Profile extends Component {
   state = {
-    user: undefined
+    user: undefined,
+    username: undefined
   };
 
   componentDidMount() {
@@ -15,13 +16,13 @@ class Profile extends Component {
   getUser = async () => {
     const username = await AsyncStorage.getItem("@GithubExplorer:username");
     const user = await getUser(username);
-    debugger;
-    this.setState({ user: user });
+    this.setState({ user: user, username: username });
   };
 
   goToDetails = () => {
+    const { username } = this.state;
     const { navigation } = this.props;
-    navigation.navigate("User");
+    navigation.navigate("User", { name: username });
   };
 
   render() {

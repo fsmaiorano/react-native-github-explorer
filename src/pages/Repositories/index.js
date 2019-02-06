@@ -8,7 +8,6 @@ import {
   FlatList
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import Header from "../../components/Header";
 import styles from "./styles";
 import { getRepositories } from "../../services/github";
 import RepositoryItem from "./RepositoryItem";
@@ -21,6 +20,8 @@ class Repositories extends Component {
   };
 
   componentDidMount() {
+    const { navigation } = this.props;
+    console.tron.log(navigation);
     this.loadRepositories();
   }
 

@@ -8,7 +8,6 @@ import {
   FlatList
 } from "react-native";
 import OrganizationItem from "./OrganizationItem";
-import Header from "../../components/Header";
 import styles from "./styles";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { getOrganizations } from "../../services/github";

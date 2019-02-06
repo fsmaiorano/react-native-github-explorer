@@ -35,15 +35,12 @@ class Welcome extends Component {
     try {
       this.setState({ isLoading: true });
       const user = await getUser(username);
-      console.tron.log(user);
-      console.tron.log(this.props.navigation);
       if (user) {
         await AsyncStorage.setItem("@GithubExplorer:username", username);
-        navigation.navigate("Main");
-        this.setState({ isLoading: false });
+        navigation.navigate("Main", { name: username });
+        this.setState({ isLoading: false, username: "" });
       }
     } catch (err) {
-      console.tron.log("error: ", err);
       this.setState({ error: true });
       this.setState({ isLoading: false });
     }
@@ -55,7 +52,7 @@ class Welcome extends Component {
       <View style={styles.container}>
         {/* <StatusBar barStyle="light-content" /> */}
         <Text style={styles.title}>Github Explorer</Text>
-        <Text style={styles.text}>Explore any profile of Github</Text>
+        <Text style={styles.text}>Explore any profile on Github</Text>
         <View style={styles.form}>
           <TextInput
             style={styles.input}

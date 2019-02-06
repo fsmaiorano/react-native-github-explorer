@@ -32,7 +32,7 @@ const Routes = (userLogged = false) =>
         screen: Profile,
         stackNavigatorConfig: {},
         navigationOptions: ({ navigation }) => ({
-          title: "Profile",
+          title: `${navigation.state.params.name}'s Profile`,
           headerLeft: null,
           headerRight: <HeaderRight />
           // headerTintColor: "blue",
@@ -42,27 +42,15 @@ const Routes = (userLogged = false) =>
         })
       },
       User: {
-        screen: createBottomTabNavigator(
-          {
-            Repositories,
-            Organizations
-          },
-
-          {
-            tabBarOptions: {
-              showIcon: true,
-              showLabel: false,
-              activeTintColor: colors.white,
-              inactiveTintColor: colors.whiteTransparent,
-              style: {
-                backgroundColor: colors.secundary
-              }
-            }
-          }
-        ),
+        screen: createBottomTabNavigator({
+          Repositories,
+          Organizations
+        }),
         navigationOptions: ({ navigation }) => ({
-          title: "Details",
-          headerLeft: null,
+          // title: "Details",
+          title: `${navigation.state.params.name}'s Profile`,
+          // headerLeft: null,
+          // headerBackTitle: "a"
           headerRight: <HeaderRight />
           // headerTintColor: "blue",
           // headerStyle: {
