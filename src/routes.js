@@ -25,7 +25,8 @@ const Routes = (userLogged = false) =>
           headerMode: "screen"
         },
         navigationOptions: ({ navigation }) => ({
-          header: null
+          header: null,
+          gesturesEnabled: false
         })
       },
       Main: {
@@ -34,7 +35,8 @@ const Routes = (userLogged = false) =>
         navigationOptions: ({ navigation }) => ({
           title: `${navigation.state.params.name}'s Profile`,
           headerLeft: null,
-          headerRight: <HeaderRight />
+          headerRight: <HeaderRight />,
+          gesturesEnabled: false
           // headerTintColor: "blue",
           // headerStyle: {
           //   backgroundColor: "red"

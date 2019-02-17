@@ -21,7 +21,6 @@ class Repositories extends Component {
 
   componentDidMount() {
     const { navigation } = this.props;
-    console.tron.log(navigation);
     this.loadRepositories();
   }
 

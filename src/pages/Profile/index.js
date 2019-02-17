@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, AsyncStorage } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  AsyncStorage,
+  Image,
+  ActivityIndicator
+} from "react-native";
 import styles from "./styles";
-import { getUser } from "../../services/github";
-import Header from "../../components/Header";
 class Profile extends Component {
   state = {
     user: undefined,
-    username: undefined
+    username: undefined,
+    isLoading: true
   };
 
   componentDidMount() {
@@ -15,8 +21,8 @@ class Profile extends Component {
 
   getUser = async () => {
     const username = await AsyncStorage.getItem("@GithubExplorer:username");
-    const user = await getUser(username);
-    this.setState({ user: user, username: username });
+    const user = JSON.parse(await AsyncStorage.getItem("@GithubExplorer:user"));
+    this.setState({ user: user, username: username, isLoading: false });
   };
 
   goToDetails = () => {
@@ -26,13 +32,28 @@ class Profile extends Component {
   };
 
   render() {
-    const { user } = this.state;
+    const { user, isLoading } = this.state;
     return (
       <View style={styles.container}>
-        {/* <Header title="Profile" /> */}
-        <TouchableOpacity onPress={this.goToDetails}>
-          <Text>More</Text>
-        </TouchableOpacity>
+        {isLoading ? (
+          <ActivityIndicator style={styles.loading} />
+        ) : (
+          <View>
+            <View style={styles.details}>
+              <Image style={styles.avatar} source={{ uri: user.avatar_url }} />
+              <View style={styles.user}>
+                {user.name ? <Text>{user.name}</Text> : null}
+                {user.email ? <Text>{user.email}</Text> : null}
+                {user.blog ? <Text>{user.blog}</Text> : null}
+                {user.location ? <Text>{user.location}</Text> : null}
+              </View>
+            </View>
+            <Text style={styles.info}>{user.bio}</Text>
+            <TouchableOpacity style={styles.button} onPress={this.goToDetails}>
+              <Text style={styles.buttonText}>More details</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     );
   }

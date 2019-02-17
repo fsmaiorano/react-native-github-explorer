@@ -37,6 +37,10 @@ class Welcome extends Component {
       const user = await getUser(username);
       if (user) {
         await AsyncStorage.setItem("@GithubExplorer:username", username);
+        await AsyncStorage.setItem(
+          "@GithubExplorer:user",
+          JSON.stringify(user.data)
+        );
         navigation.navigate("Main", { name: username });
         this.setState({ isLoading: false, username: "" });
       }
@@ -50,7 +54,6 @@ class Welcome extends Component {
     const { username, isLoading, error } = this.state;
     return (
       <View style={styles.container}>
-        {/* <StatusBar barStyle="light-content" /> */}
         <Text style={styles.title}>Github Explorer</Text>
         <Text style={styles.text}>Explore any profile on Github</Text>
         <View style={styles.form}>
